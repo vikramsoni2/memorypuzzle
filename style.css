@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@300;700&family=Nunito&display=swap');
+
+* , *::before, *::after{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { height: 100%; }
+
+button {
+  cursor:pointer;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background-color:#fafafa;
+  position: relative;
+  min-height: 100%;
+  display:grid;
+  grid-template-rows: 60px 1fr;
+  grid-template-areas: 
+    "header"
+    "game"
+}
+
+.header {
+  grid-area:header;
+  
+  color: #FFF;
+  background-color: #E54B4B;
+  padding: 0 15px ;
+  font-size:20px;
+  
+  display: grid;
+  align-items:center;
+  grid-template-columns:80px auto 80px;
+  grid-template-areas:"level title reset"
+}
+
+.title, .level{
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+.title {
+  grid-area:title;
+  justify-self: center;
+
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size:24px;
+  text-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+}
+
+.level {
+  grid-area: level;
+  justify-self:start;
+  
+  font-size:18px;
+  visibility:hidden;
+}
+
+.reset {
+  grid-area: reset;
+  justify-self: end;
+}
+
+.game {
+  grid-area:game;
+  margin:10px;
+  position:relative;
+  
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.game .box {
+  cursor:pointer;
+  border:1px solid #ccc;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  transition: background-color 250ms ease-in-out;
+}
+
+.flash {
+  background-color:deepskyblue;
+}
+.correct {
+  background-color:limegreen;
+}
+.incorrect {
+  background-color:#E54B4B;
+}
+
+.start{
+  margin-top:25px;
+  text-align:center;
+}
+
+.start button {
+  border:0;
+  padding:10px 30px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight:bold;
+  text-transform:uppercase;
+  font-size:18px;
+  color:white;
+  background-color:#E54B4B;
+  box-shadow: 0 0 5px rgba(0,0,0,0.4);
+}
+
+.reset button{
+  border:0;
+  padding:10px 20px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight:bold;
+  color:white;
+  background-color:#333;
+  box-shadow: 0 0 5px rgba(0,0,0,0.4);
+  display: none;
+}
+
+
+.help {
+  grid-area: game;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  
+  position:absolute;
+  bottom:0;
+  right:0;
+  top:0;
+  z-index:1;
+  width:100%;
+  
+  padding:20px;
+  font-size:18px;
+  background-color:#FEFEFE;
+  border:10px solid #ccc;
+}
+
+.text {
+  max-width:590px;
+}
+
+.text p{
+  margin-bottom:16px;
+  line-height:25px;
+  text-align:justify;
+}
+
+.green{color:green; font-weight:bold}
+.red {color:crimson; font-weight:bold;}
+
+.game.disable::after {
+  content:'';
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index:1;
+  cursor: not-allowed;
+}
+
+
+@media screen and (max-width: 400px) {
+  .title {
+    font-size:22px;
+    letter-spacing:0px
+  }
+  .level {
+    font-size:14px;
+    letter-spacing:0pxs
+  }
+  .reset button {
+    padding:8px 10px;
+  }
+  .header {
+    grid-template-columns:70px auto 70px;
+  }
+  .start{
+    margin-top:5px;
+  }
+  .start button {
+    font-size:16px;
+    padding:5px 10px;
+  }
+  .text p{
+    font-size:16px;
+    line-height:20px;
+    text-align:justify;
+  }
+  .game {
+    grid-gap: 6px;
+  }
+  .game .box {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  }
+}
+
+@media screen and (min-width: 900px) {
+  body {
+    grid-template-rows: auto;
+    grid-template-columns:minmax(200px, 1fr) 2fr;
+    grid-template-areas: 
+      "header game"
+  }
+
+  .header {
+    display: grid;
+    align-items:center;
+    grid-template-rows:60px auto;
+    grid-template-columns:1fr 1fr;
+    grid-template-areas:
+      "level reset"
+      "title title" 
+  }
+}
